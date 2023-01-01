@@ -2,6 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { getCategorySelector } from "../redux/selector";
+
 const Navbar = () => {
   return (
     <div className="navbar">

@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFound from "./components/NotFound";
 import SubApp from "./SubApp";
+import NavShop from "./components/shop/NavShop";
 
 function App() {
   return (
@@ -16,7 +17,11 @@ function App() {
         <Route path="/" element={<SubApp />}>
           <Route exact path="home" element={<HomePage />} />
           <Route path="/" element={<Navigate replace to="/home" />} />
-          <Route exact path="shop" element={<ShopPage />} />
+          <Route path="shop" element={<ShopPage />}>
+            <Route index element={<NavShop />} />
+            <Route path=":category" element={<NavShop />} />
+          </Route>
+
           <Route exact path="detail/:id" element={<DetailPage />} />
           <Route exact path="cart" element={<CartPage />} />
           <Route exact path="login" element={<LoginPage />} />

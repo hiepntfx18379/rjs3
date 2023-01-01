@@ -1,12 +1,30 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Outlet, useParams } from "react-router-dom";
 import bannerShop from "../asset/bannerShop.jpg";
-import ProductItem from "../components/home/products/productItem";
+import { shopSlice } from "../components/shop/shopSlice";
 import Pagination from "../components/shop/pagination";
-import { productListSelector } from "../redux/selector";
+import { listRemaining } from "../redux/selector";
+import NavShop from "../components/shop/NavShop";
+
 const ShopPage = () => {
-  const listProduct = useSelector(productListSelector);
-  console.log(listProduct);
+  const dispatch = useDispatch();
+  const listProduct = useSelector(listRemaining);
+  const [textSearch, setTextSearch] = useState("");
+  const [categoryProduct, setCategoryProduct] = useState("");
+  const params = useParams();
+
+  const handleCategory = () => {
+    setCategoryProduct(params.category);
+    dispatch(shopSlice.actions.productCategory(params.category));
+  };
+
+  console.log("list: ", listProduct);
+
+  const handleTextSearchInput = (e) => {
+    setTextSearch(e.target.value);
+    dispatch(shopSlice.actions.textSearch(e.target.value));
+  };
 
   return (
     <div>
@@ -29,6 +47,8 @@ const ShopPage = () => {
               type="text"
               placeholder="Search for"
               className="border-element"
+              value={textSearch}
+              onChange={handleTextSearchInput}
             />
             <select className="border-element">
               <option value="default">default sorting</option>
@@ -39,30 +59,71 @@ const ShopPage = () => {
         </div>
 
         <div className="block-grid-categories">
-          <div className="col-span-1">
+          <nav className="col-span-1">
             <div className="box-category w-100">
               <div className="main-category">Apple</div>
-              <div className="sub-category link">All</div>
+
+              <Link
+                to="All"
+                className="sub-category link"
+                onClick={handleCategory}
+              >
+                All
+              </Link>
 
               <div className=" n-category">iphone & mac</div>
-              <div className="sub-category link">Iphone</div>
-              <div className="sub-category link">Ipad</div>
-              <div className="sub-category link">Macbook</div>
+              <div className="flex flex-col">
+                <Link
+                  to="iphone"
+                  className="sub-category link"
+                  onClick={handleCategory}
+                >
+                  Iphone
+                </Link>
+                <Link
+                  to="ipad"
+                  className="sub-category link"
+                  onClick={handleCategory}
+                >
+                  Ipad
+                </Link>
+                <Link
+                  to="macbook"
+                  className="sub-category link"
+                  onClick={handleCategory}
+                >
+                  Macbook
+                </Link>
+              </div>
 
               <div className=" n-category">Wireless</div>
-              <div className="sub-category link">Airpod</div>
-              <div className="sub-category link">Watch</div>
+              <div className="flex flex-col">
+                <Link
+                  to="airpod"
+                  className="sub-category link"
+                  onClick={handleCategory}
+                >
+                  Airpod
+                </Link>
+                <Link
+                  to="watch"
+                  className="sub-category link"
+                  onClick={handleCategory}
+                >
+                  Watch
+                </Link>
+              </div>
 
               <div className=" n-category">other</div>
-              <div className="sub-category link">Mouse</div>
-              <div className="sub-category link">Keyboard</div>
-              <div className="sub-category link">Other</div>
+              <div className="flex flex-col">
+                <Link className="sub-category link">Mouse</Link>
+                <Link className="sub-category link">Keyboard</Link>
+                <Link className="sub-category link">Other</Link>
+              </div>
             </div>
-          </div>
+          </nav>
           <div className="col-span-4 ">
-            <div className="grid grid-cols-3 gap-x-1 ml-4 text-center relative">
-              <Pagination />
-            </div>
+            <Outlet />
           </div>
         </div>
       </div>

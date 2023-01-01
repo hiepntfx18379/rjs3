@@ -68,7 +68,7 @@
   }
 
   .sub-category {
-    @apply text-gray-400 text-sm font-semibold py-2 px-3 tracking-widest;
+    @apply text-gray-400 text-sm font-semibold py-2 px-3 tracking-widest cursor-pointer;
   }
 
   .n-category {

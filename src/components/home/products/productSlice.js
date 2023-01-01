@@ -12,10 +12,7 @@ export const showDetailProductSlice = createSlice({
     },
 
     SHOW_POPUP: (state, action) => {
-      const productShow = state.productsList.findIndex(
-        (index) => index === action.id
-      );
-      if (productShow) state.status = true;
+      state.status = action.payload;
     },
 
     HIDE_POPUP: (state, action) => {

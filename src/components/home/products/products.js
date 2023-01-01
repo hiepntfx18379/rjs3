@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getApiProduct } from "../../../redux/action";
-import { productListSelector } from "../../../redux/selector";
+import {
+  getProductshow,
+  productListSelector,
+  showDetailSelector,
+} from "../../../redux/selector";
+import Modal from "./Modal";
 import ProductItem from "./productItem";
 import { showDetailProductSlice } from "./productSlice";
+
+function productShow(product, show) {
+  return show && <Modal proDetail={product} />;
+}
 
 const Products = () => {
   const [product, setProduct] = useState([]);
   const dispatch = useDispatch();
-  const listProSelector = useSelector(productListSelector);
+  const show = useSelector(showDetailSelector);
+  const [pro, setPro] = useState();
+
+  let proShow = productShow(pro, show);
 
   useEffect(() => {
     async function getDataProduct() {
@@ -31,9 +42,12 @@ const Products = () => {
       </div>
       <div className=" text-center text-sm grid grid-cols-4 gap-4">
         {product.map((pro, id) => (
-          <ProductItem pro={pro} id={id} key={id} />
+          <div key={id} onClick={() => setPro(pro)}>
+            <ProductItem pro={pro} />
+          </div>
         ))}
       </div>
+      {proShow}
     </div>
   );
 };

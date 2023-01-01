@@ -1,17 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import iphone from "../../../asset/product_1.png";
 import mac from "../../../asset/product_2.png";
 import ipad from "../../../asset/product_3.png";
 import watch from "../../../asset/product_4.png";
 import airPods from "../../../asset/product_5.png";
+import { getCategorySelector } from "../../../redux/selector";
 
 const Cartegories = () => {
   const map1 = [iphone, mac];
   const map2 = [ipad, watch, airPods];
+  const categorySelector = useSelector(getCategorySelector);
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/shop");
+    navigate(`/shop/${categorySelector}`);
   };
   return (
     <div className="container">

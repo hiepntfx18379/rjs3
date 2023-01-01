@@ -10,8 +10,9 @@ function productAPage(listProduct, productPerPage, currentPage) {
   );
 }
 
-const Pagination = () => {
-  let listProduct = useSelector(productListSelector);
+const Pagination = ({ listPro }) => {
+  let listProduct = listPro;
+
   const [currentPage, setCurrentPage] = useState(1);
   let productPerPage = 3;
   let totalPage = Math.ceil(listProduct.length / productPerPage);
