@@ -5,6 +5,14 @@
   body {
     @apply font-montserrat;
   }
+
+  th {
+    @apply py-3 w-[21%];
+  }
+
+  td {
+    @apply p-1;
+  }
 }
 
 @layer components {
@@ -13,7 +21,11 @@
   }
 
   .navbar {
-    @apply flex justify-around  bg-white h-20 text-black items-center font-semibold;
+    @apply flex justify-around  bg-white h-20 text-black items-center font-semibold top-0;
+  }
+
+  .scrolled {
+    @apply flex justify-around items-center font-semibold bg-black h-20 text-white sticky top-0 z-50;
   }
 
   .link {
@@ -77,5 +89,29 @@
 
   .btn-pagination {
     @apply border-2 border-black p-2 font-semibold text-white bg-black;
+  }
+
+  .titleDetail {
+    @apply text-black font-bold text-3xl p-2 tracking-widest;
+  }
+
+  .img-detail {
+    @apply w-[80px] h-[80px];
+  }
+
+  .inputSignUp {
+    @apply h-[45px] shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
+  }
+
+  .btnSign {
+    @apply h-[45px] shadow appearance-none border bg-slate-500 text-xl rounded w-full py-2 px-3 text-white leading-tight focus:outline-none;
+  }
+
+  .banner {
+    @apply bg-[url('./asset/banner1.jpg')] bg-repeat bg-center;
+  }
+
+  .hoverLogout {
+    @apply hover:absolute hover:flex hover:flex-col;
   }
 }

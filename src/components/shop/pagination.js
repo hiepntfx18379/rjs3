@@ -1,7 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { productListSelector } from "../../redux/selector";
-import ProductItem from "../home/products/productItem";
+import React, { useState } from "react";
+import ProductShop from "./ProductShop";
 
 function productAPage(listProduct, productPerPage, currentPage) {
   return listProduct.slice(
@@ -14,7 +12,7 @@ const Pagination = ({ listPro }) => {
   let listProduct = listPro;
 
   const [currentPage, setCurrentPage] = useState(1);
-  let productPerPage = 3;
+  let productPerPage = 8;
   let totalPage = Math.ceil(listProduct.length / productPerPage);
   let listProductSlice = [];
 
@@ -33,7 +31,7 @@ const Pagination = ({ listPro }) => {
   return (
     <>
       {listProductSlice.map((pro, id) => {
-        return <ProductItem pro={pro} id={id} key={id} />;
+        return <ProductShop pro={pro} id={id} key={id} />;
       })}
       <div className="absolute -bottom-[80px] left-[40%]">
         <button onClick={handlePreviousPage} className="btn-pagination ">

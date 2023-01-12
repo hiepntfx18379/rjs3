@@ -14,7 +14,7 @@ const Cartegories = () => {
   const categorySelector = useSelector(getCategorySelector);
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/shop/${categorySelector}`);
+    navigate(`/shop`);
   };
   return (
     <div className="container">
@@ -26,12 +26,26 @@ const Cartegories = () => {
       </div>
       <div className=" grid grid-cols-2 gap-x-4 mb-4 rounded-md overflow-hidden">
         {map1.map((cate, i) => {
-          return <img src={cate} key={i} onClick={handleClick} />;
+          return (
+            <img
+              src={cate}
+              key={i}
+              onClick={handleClick}
+              className="hover:opacity-60"
+            />
+          );
         })}
       </div>
       <div className="grid grid-cols-3 gap-x-4 mb-4 rounded-md overflow-hidden">
         {map2.map((cate, i) => {
-          return <img src={cate} key={i} onClick={handleClick} />;
+          return (
+            <img
+              src={cate}
+              key={i}
+              onClick={handleClick}
+              className="hover:opacity-60"
+            />
+          );
         })}
       </div>
     </div>

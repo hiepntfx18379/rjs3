@@ -1,7 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { showDetailSelector } from "../../../redux/selector";
+import { useDispatch } from "react-redux";
 import { showDetailProductSlice } from "./productSlice";
-import Modal from "./Modal";
 
 const ProductItem = ({ pro }) => {
   const dispatch = useDispatch();
@@ -11,7 +9,7 @@ const ProductItem = ({ pro }) => {
 
   return (
     <>
-      <div>
+      <div className="animate-[zoomOut_2s_ease-in-out]">
         <img
           src={pro.img1}
           className="hover:opacity-60"

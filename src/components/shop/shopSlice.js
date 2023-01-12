@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const shopSlice = createSlice({
   name: "shop",
   initialState: {
-    productsList: [],
     category: "All",
     search: "",
+    sort: "default",
   },
   reducers: {
     productCategory: (state, action) => {
@@ -14,6 +14,10 @@ export const shopSlice = createSlice({
 
     textSearch: (state, action) => {
       state.search = action.payload;
+    },
+
+    sortProduct: (state, action) => {
+      state.sort = action.payload;
     },
   },
 });

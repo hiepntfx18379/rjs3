@@ -1,30 +1,29 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, Outlet, useParams } from "react-router-dom";
 import bannerShop from "../asset/bannerShop.jpg";
 import { shopSlice } from "../components/shop/shopSlice";
-import Pagination from "../components/shop/pagination";
-import { listRemaining } from "../redux/selector";
-import NavShop from "../components/shop/NavShop";
 
 const ShopPage = () => {
   const dispatch = useDispatch();
-  const listProduct = useSelector(listRemaining);
   const [textSearch, setTextSearch] = useState("");
-  const [categoryProduct, setCategoryProduct] = useState("");
   const params = useParams();
-
-  const handleCategory = () => {
-    setCategoryProduct(params.category);
-    dispatch(shopSlice.actions.productCategory(params.category));
-  };
-
-  console.log("list: ", listProduct);
 
   const handleTextSearchInput = (e) => {
     setTextSearch(e.target.value);
     dispatch(shopSlice.actions.textSearch(e.target.value));
   };
+
+  const [sortProduct, setSortProduct] = useState("Default");
+
+  const handleSortProduct = (e) => {
+    setSortProduct(e.target.value);
+    dispatch(shopSlice.actions.sortProduct(e.target.value));
+  };
+
+  useEffect(() => {
+    dispatch(shopSlice.actions.productCategory(params.category));
+  }, [params.category]);
 
   return (
     <div>
@@ -50,9 +49,8 @@ const ShopPage = () => {
               value={textSearch}
               onChange={handleTextSearchInput}
             />
-            <select className="border-element">
+            <select className="border-element" onChange={handleSortProduct}>
               <option value="default">default sorting</option>
-              <option value="a-z">A-Z</option>
               <option value="price">price (Hight-Low)</option>
             </select>
           </div>
@@ -63,53 +61,29 @@ const ShopPage = () => {
             <div className="box-category w-100">
               <div className="main-category">Apple</div>
 
-              <Link
-                to="All"
-                className="sub-category link"
-                onClick={handleCategory}
-              >
+              <Link to="All" className="sub-category link">
                 All
               </Link>
 
               <div className=" n-category">iphone & mac</div>
               <div className="flex flex-col">
-                <Link
-                  to="iphone"
-                  className="sub-category link"
-                  onClick={handleCategory}
-                >
+                <Link to="iphone" className="sub-category link">
                   Iphone
                 </Link>
-                <Link
-                  to="ipad"
-                  className="sub-category link"
-                  onClick={handleCategory}
-                >
+                <Link to="ipad" className="sub-category link">
                   Ipad
                 </Link>
-                <Link
-                  to="macbook"
-                  className="sub-category link"
-                  onClick={handleCategory}
-                >
+                <Link to="macbook" className="sub-category link">
                   Macbook
                 </Link>
               </div>
 
               <div className=" n-category">Wireless</div>
               <div className="flex flex-col">
-                <Link
-                  to="airpod"
-                  className="sub-category link"
-                  onClick={handleCategory}
-                >
+                <Link to="airpod" className="sub-category link">
                   Airpod
                 </Link>
-                <Link
-                  to="watch"
-                  className="sub-category link"
-                  onClick={handleCategory}
-                >
+                <Link to="watch" className="sub-category link">
                   Watch
                 </Link>
               </div>
